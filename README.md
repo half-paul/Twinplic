@@ -7,6 +7,10 @@
 
 A folder and disk backup app for macOS 14 or later. It copies only what changed, keeps replaced and removed files in a SafetyNet folder, and runs on a schedule even when the app is closed.
 
+<p align="center">
+  <img src="Design/screenshots/main-window.png" alt="Twinplic main window showing a backup task with its source, destination, last run and options" width="720">
+</p>
+
 ## Features
 
 - **Incremental backups** of any folder or disk, comparing size and modification time.

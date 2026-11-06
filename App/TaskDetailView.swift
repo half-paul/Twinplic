@@ -425,10 +425,9 @@ extension RunRecord {
         guard let filesAdded, let filesReplaced, let filesDeleted else {
             return "\(itemsCopied) items copied, \(itemsDeleted) removed"
         }
-        let summary = "\(filesAdded) \(filesAdded == 1 ? "file" : "files") added · \(filesReplaced) replaced · \(filesDeleted) deleted"
-        guard wasDryRun else { return summary }
         let unchanged = filesUnchanged.map { " · \($0) unchanged" } ?? ""
-        return "Would be: \(summary)\(unchanged)"
+        let summary = "\(filesAdded) \(filesAdded == 1 ? "file" : "files") added · \(filesReplaced) replaced · \(filesDeleted) deleted\(unchanged)"
+        return wasDryRun ? "Would be: \(summary)" : summary
     }
 }
 

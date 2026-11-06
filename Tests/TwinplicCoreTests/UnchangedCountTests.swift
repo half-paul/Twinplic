@@ -53,6 +53,12 @@ final class UnchangedCountTests: XCTestCase {
         XCTAssertEqual(BackupEngine(task: dryRun).run().filesUnchanged, 3)
     }
 
+    func testRealRunRecordsTheSameCount() throws {
+        try backUpThenChange()
+
+        XCTAssertEqual(BackupEngine(task: task).run().filesUnchanged, 3)
+    }
+
     func testNothingIsUnchangedInAnEmptyDestination() {
         XCTAssertEqual(BackupEngine(task: task).preview().unchangedCount, 0)
     }
