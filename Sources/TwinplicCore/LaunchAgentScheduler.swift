@@ -3,7 +3,7 @@ import Foundation
 
 /// Schedules tasks with launchd, so they run while the app is closed and catch up after sleep.
 public struct LaunchAgentScheduler: Sendable {
-    public static let labelPrefix = "com.copyfx.task."
+    public static let labelPrefix = "com.twinplic.task."
     public static let runTaskArgument = "--run-task"
 
     public let agentsDirectory: URL

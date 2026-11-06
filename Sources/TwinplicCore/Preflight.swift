@@ -25,14 +25,14 @@ public enum PreflightError: LocalizedError, Equatable {
         case .emptySource:
             "The source is empty but the destination has files. Nothing was changed, because mirroring would remove everything."
         case .unrecognizedDestination(let path):
-            "\(path) already has files that CopyFX didn't put there. This backup could replace or remove them."
+            "\(path) already has files that Twinplic didn't put there. This backup could replace or remove them."
         }
     }
 }
 
 enum Preflight {
     /// Throws if running `task` could damage data. `allowUnrecognizedDestination` is the
-    /// user's explicit consent to take over a non-empty folder without a CopyFX marker.
+    /// user's explicit consent to take over a non-empty folder without a Twinplic marker.
     static func check(_ task: BackupTask, allowUnrecognizedDestination: Bool) throws {
         let source = try existingFolder(task.sourcePath, missing: PreflightError.sourceMissing(task.sourcePath))
         let destination = try existingFolder(task.destinationPath, missing: PreflightError.destinationMissing(task.destinationPath))

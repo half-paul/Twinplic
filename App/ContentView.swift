@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import SwiftUI
 
 struct ContentView: View {
@@ -76,7 +76,7 @@ struct ContentView: View {
         }
         .sheet(item: $model.preview) { PreviewSheet(result: $0) }
         .confirmationDialog(
-            "This destination has files CopyFX didn't put there",
+            "This destination has files Twinplic didn't put there",
             isPresented: consentBinding,
             titleVisibility: .visible,
             presenting: model.pendingConsent

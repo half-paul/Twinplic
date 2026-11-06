@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import Observation
 import SwiftUI
 
@@ -36,7 +36,7 @@ enum ScheduledRunPanel {
             case .success(let record):
                 exit(record.status == .success || record.status == .skipped ? 0 : 1)
             case .failure(let error):
-                fputs("CopyFX: \(error.localizedDescription)\n", stderr)
+                fputs("Twinplic: \(error.localizedDescription)\n", stderr)
                 exit(1)
             }
         }
@@ -53,7 +53,7 @@ enum ScheduledRunPanel {
             backing: .buffered,
             defer: false
         )
-        panel.title = "CopyFX"
+        panel.title = "Twinplic"
         panel.contentView = hosting
         panel.level = .floating
         // Closing only hides the panel. The run carries on.

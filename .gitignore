@@ -1,7 +1,7 @@
 build/
 .build/
 .swiftpm/
-CopyFX.xcodeproj/
+Twinplic.xcodeproj/
 build-intel/
 .DS_Store
 dist/

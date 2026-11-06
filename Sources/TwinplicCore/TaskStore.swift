@@ -14,7 +14,7 @@ public struct TaskStore: Sendable {
 
     public static var defaultDirectory: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("CopyFX", isDirectory: true)
+            .appendingPathComponent("Twinplic", isDirectory: true)
     }
 
     private var tasksFile: URL { directory.appendingPathComponent("tasks.json") }

@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="Design/logo/logo-dark-bg.png">
-    <img src="Design/logo/logo-light-bg.png" alt="CopyFX" width="360">
+    <img src="Design/logo/logo-light-bg.png" alt="Twinplic" width="360">
   </picture>
 </p>
 
@@ -22,44 +22,44 @@ A folder and disk backup app for macOS 14 or later. It copies only what changed,
 
 ## Install
 
-Download the disk image for your Mac from the [latest release](https://github.com/half-paul/CopyFX/releases/latest):
+Download the disk image for your Mac from the [latest release](https://github.com/half-paul/Twinplic/releases/latest):
 
 | Mac | Download |
 | --- | --- |
-| Apple silicon (M1 or later) | `CopyFX-<version>-AppleSilicon.dmg` |
-| Intel | `CopyFX-<version>-Intel.dmg` |
+| Apple silicon (M1 or later) | `Twinplic-<version>-AppleSilicon.dmg` |
+| Intel | `Twinplic-<version>-Intel.dmg` |
 
-Open the disk image and drag CopyFX to Applications.
+Open the disk image and drag Twinplic to Applications.
 
 **The app isn't notarized by Apple**, so macOS blocks it the first time you open it. To allow it:
 
-1. Try to open CopyFX, then choose **Done** in the warning.
+1. Try to open Twinplic, then choose **Done** in the warning.
 2. Open **System Settings > Privacy & Security**, scroll down and choose **Open Anyway**.
 
 Or run this in Terminal, after checking the download against `SHA256SUMS.txt` in the release:
 
 ```sh
-xattr -dr com.apple.quarantine /Applications/CopyFX.app
+xattr -dr com.apple.quarantine /Applications/Twinplic.app
 ```
 
-## Using CopyFX
+## Using Twinplic
 
 1. Choose **New Backup** with the + button, or press ⌘N.
 2. Choose a **Source** and a **Destination**.
 3. Choose **Preview** to see what would be copied. Nothing is changed.
 4. Choose **Back Up Now**.
 
-The full guide covers every feature and setting. Open it with **Help > CopyFX Help** or ⌘?, or from the menu bar icon. Click a question mark beside a control for a short explanation.
+The full guide covers every feature and setting. Open it with **Help > Twinplic Help** or ⌘?, or from the menu bar icon. Click a question mark beside a control for a short explanation.
 
 ### Permissions
 
-macOS asks for access the first time CopyFX reaches Desktop, Documents, Downloads, a removable disk or a network disk. Other protected data, such as Mail and Safari, needs Full Disk Access. An app can't grant that itself, so CopyFX detects the block and links to the setting. Turn on CopyFX in the list, then quit and reopen it.
+macOS asks for access the first time Twinplic reaches Desktop, Documents, Downloads, a removable disk or a network disk. Other protected data, such as Mail and Safari, needs Full Disk Access. An app can't grant that itself, so Twinplic detects the block and links to the setting. Turn on Twinplic in the list, then quit and reopen it.
 
 ## Data protection
 
 - A run stops if a disk isn't mounted, including when a stale `/Volumes/Name` folder is left on the startup disk.
 - Mirroring stops if the source is empty but the destination isn't.
-- A non-empty destination without a `.copyfx-destination` marker needs explicit consent in the app. Scheduled runs never get that consent.
+- A non-empty destination without a `.twinplic-destination` marker needs explicit consent in the app. Scheduled runs never get that consent.
 - A source folder that can't be read is skipped, and its backup stays in place.
 - Files are copied to a temporary name and renamed once complete, so an interrupted run leaves no partial file under the real name.
 - A file that changes while a paused run is half way through copying it is discarded, and copied on the next run.
@@ -82,15 +82,15 @@ You need Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 xcodegen generate
-xcodebuild -project CopyFX.xcodeproj -scheme CopyFX -configuration Release -derivedDataPath build build
-open build/Build/Products/Release/CopyFX.app
+xcodebuild -project Twinplic.xcodeproj -scheme Twinplic -configuration Release -derivedDataPath build build
+open build/Build/Products/Release/Twinplic.app
 ```
 
-For Intel Macs, use the `CopyFX-Intel` scheme, which has its own build folder:
+For Intel Macs, use the `Twinplic-Intel` scheme, which has its own build folder:
 
 ```sh
 xcodegen generate
-xcodebuild -project CopyFX.xcodeproj -scheme CopyFX-Intel -configuration Release -destination 'generic/platform=macOS' -derivedDataPath build-intel build
+xcodebuild -project Twinplic.xcodeproj -scheme Twinplic-Intel -configuration Release -destination 'generic/platform=macOS' -derivedDataPath build-intel build
 ```
 
 `project.yml` signs with the maintainer's Apple Development certificate, so a Full Disk Access grant survives rebuilds. Without that certificate, add this to the `xcodebuild` command. You'll then need to grant access again after each build.
@@ -109,18 +109,18 @@ Other commands:
 
 | Part | Location | Job |
 | --- | --- | --- |
-| Planner | `Sources/CopyFXCore/Planner.swift` | Compares source and destination by size, modification time and symlink target. Writes nothing. |
-| Engine | `Sources/CopyFXCore/BackupEngine.swift` | Applies a plan with `copyfile(3)`, keeping permissions, extended attributes and ACLs. Clones on APFS when it can. Handles pause and stop. |
-| Preflight | `Sources/CopyFXCore/Preflight.swift` | Refuses runs that could damage data. |
-| SafetyNet | `Sources/CopyFXCore/SafetyNet.swift` | Moves old items to `_CopyFX_SafetyNet/<UTC date>/` on the destination and prunes them by age. |
-| Scheduler | `Sources/CopyFXCore/LaunchAgentScheduler.swift` | Writes one LaunchAgent per scheduled task, which runs `CopyFX --run-task <id>`. |
-| Time estimates | `Sources/CopyFXCore/TimeEstimate.swift` | Works out the time left in a scan or copy. |
-| Access checks | `Sources/CopyFXCore/AccessProblems.swift` | Sorts permission failures by cause and detects Full Disk Access. |
+| Planner | `Sources/TwinplicCore/Planner.swift` | Compares source and destination by size, modification time and symlink target. Writes nothing. |
+| Engine | `Sources/TwinplicCore/BackupEngine.swift` | Applies a plan with `copyfile(3)`, keeping permissions, extended attributes and ACLs. Clones on APFS when it can. Handles pause and stop. |
+| Preflight | `Sources/TwinplicCore/Preflight.swift` | Refuses runs that could damage data. |
+| SafetyNet | `Sources/TwinplicCore/SafetyNet.swift` | Moves old items to `_Twinplic_SafetyNet/<UTC date>/` on the destination and prunes them by age. |
+| Scheduler | `Sources/TwinplicCore/LaunchAgentScheduler.swift` | Writes one LaunchAgent per scheduled task, which runs `Twinplic --run-task <id>`. |
+| Time estimates | `Sources/TwinplicCore/TimeEstimate.swift` | Works out the time left in a scan or copy. |
+| Access checks | `Sources/TwinplicCore/AccessProblems.swift` | Sorts permission failures by cause and detects Full Disk Access. |
 | App | `App/` | SwiftUI interface and menu bar icon. |
 | Help | `App/HelpContent.swift` | Text for the Help window and the question mark popups. |
 | Scheduled run panel | `App/ScheduledRunPanel.swift` | Floating progress window shown by launchd runs, with the current file, Pause and Stop. |
 
-Tasks and history are stored in `~/Library/Application Support/CopyFX`.
+Tasks and history are stored in `~/Library/Application Support/Twinplic`.
 
 ## License
 

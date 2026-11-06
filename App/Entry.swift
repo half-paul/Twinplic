@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import CoreServices
 import Foundation
 import SwiftUI
@@ -13,7 +13,7 @@ enum Entry {
         if arguments.count == 3, arguments[1] == LaunchAgentScheduler.runTaskArgument {
             runScheduled(taskID: arguments[2])
         }
-        CopyFXApp.main()
+        TwinplicApp.main()
     }
 
     @MainActor
@@ -21,12 +21,12 @@ enum Entry {
         do {
             let store = TaskStore()
             guard let id = UUID(uuidString: taskID), let task = try store.loadTasks().first(where: { $0.id == id }) else {
-                fputs("CopyFX: no task with id \(taskID)\n", stderr)
+                fputs("Twinplic: no task with id \(taskID)\n", stderr)
                 exit(2)
             }
             ScheduledRunPanel.run(task, store: store)
         } catch {
-            fputs("CopyFX: \(error.localizedDescription)\n", stderr)
+            fputs("Twinplic: \(error.localizedDescription)\n", stderr)
             exit(1)
         }
     }
@@ -51,16 +51,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-struct CopyFXApp: App {
+struct TwinplicApp: App {
     static let mainWindowID = "main"
     static let helpWindowID = "help"
-    static let helpWindowTitle = "CopyFX Help"
+    static let helpWindowTitle = "Twinplic Help"
 
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var model = AppModel()
 
     var body: some Scene {
-        Window("CopyFX", id: Self.mainWindowID) {
+        Window("Twinplic", id: Self.mainWindowID) {
             ContentView()
                 .environment(model)
                 .frame(minWidth: 820, minHeight: 560)
@@ -82,7 +82,7 @@ struct CopyFXApp: App {
         }
 
         MenuBarExtra(
-            "CopyFX",
+            "Twinplic",
             systemImage: model.activeRuns.isEmpty ? "externaldrive.badge.timemachine" : "arrow.triangle.2.circlepath"
         ) {
             MenuBarContent()
@@ -106,15 +106,15 @@ private struct MenuBarContent: View {
         if !runningTasks.isEmpty {
             Divider()
         }
-        Button("Open CopyFX") {
+        Button("Open Twinplic") {
             NSApp.setActivationPolicy(.regular)
-            openWindow(id: CopyFXApp.mainWindowID)
+            openWindow(id: TwinplicApp.mainWindowID)
             NSApp.activate()
         }
         HelpMenuItem(model: model)
         Toggle("Launch at Login", isOn: launchAtLogin)
         Divider()
-        Button("Quit CopyFX") { NSApp.terminate(nil) }
+        Button("Quit Twinplic") { NSApp.terminate(nil) }
             .keyboardShortcut("q")
     }
 

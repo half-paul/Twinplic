@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import SwiftUI
 
 struct TaskDetailView: View {

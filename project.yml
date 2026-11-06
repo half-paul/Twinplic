@@ -1,10 +1,10 @@
-name: CopyFX
+name: Twinplic
 options:
-  bundleIdPrefix: com.copyfx
+  bundleIdPrefix: com.twinplic
   deploymentTarget:
     macOS: "14.0"
 packages:
-  CopyFXCore:
+  TwinplicCore:
     path: .
 targetTemplates:
   App:
@@ -13,11 +13,11 @@ targetTemplates:
     sources:
       - App
     dependencies:
-      - package: CopyFXCore
+      - package: TwinplicCore
     settings:
       base:
-        PRODUCT_NAME: CopyFX
-        PRODUCT_BUNDLE_IDENTIFIER: com.copyfx.app
+        PRODUCT_NAME: Twinplic
+        PRODUCT_BUNDLE_IDENTIFIER: com.twinplic.app
         GENERATE_INFOPLIST_FILE: YES
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
@@ -29,17 +29,17 @@ targetTemplates:
         DEVELOPMENT_TEAM: U4ZLRP8FWD
         ENABLE_HARDENED_RUNTIME: NO
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
-        INFOPLIST_KEY_NSDesktopFolderUsageDescription: CopyFX backs up the folders you choose.
-        INFOPLIST_KEY_NSDocumentsFolderUsageDescription: CopyFX backs up the folders you choose.
-        INFOPLIST_KEY_NSDownloadsFolderUsageDescription: CopyFX backs up the folders you choose.
-        INFOPLIST_KEY_NSNetworkVolumesUsageDescription: CopyFX backs up to and from the network disks you choose.
-        INFOPLIST_KEY_NSRemovableVolumesUsageDescription: CopyFX backs up to and from the disks you choose.
+        INFOPLIST_KEY_NSDesktopFolderUsageDescription: Twinplic backs up the folders you choose.
+        INFOPLIST_KEY_NSDocumentsFolderUsageDescription: Twinplic backs up the folders you choose.
+        INFOPLIST_KEY_NSDownloadsFolderUsageDescription: Twinplic backs up the folders you choose.
+        INFOPLIST_KEY_NSNetworkVolumesUsageDescription: Twinplic backs up to and from the network disks you choose.
+        INFOPLIST_KEY_NSRemovableVolumesUsageDescription: Twinplic backs up to and from the disks you choose.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 targets:
-  CopyFX:
+  Twinplic:
     templates:
       - App
-  CopyFX-Intel:
+  Twinplic-Intel:
     templates:
       - App
     settings:

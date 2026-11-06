@@ -1,5 +1,5 @@
 import XCTest
-@testable import CopyFXCore
+@testable import TwinplicCore
 
 final class UnchangedCountTests: XCTestCase {
     private var root: URL!
@@ -8,7 +8,7 @@ final class UnchangedCountTests: XCTestCase {
     private let fileManager = FileManager.default
 
     override func setUpWithError() throws {
-        root = fileManager.temporaryDirectory.appendingPathComponent("CopyFXUnchanged-\(UUID().uuidString)")
+        root = fileManager.temporaryDirectory.appendingPathComponent("TwinplicUnchanged-\(UUID().uuidString)")
         source = root.appendingPathComponent("source")
         destination = root.appendingPathComponent("destination")
         try fileManager.createDirectory(at: source.appendingPathComponent("sub"), withIntermediateDirectories: true)

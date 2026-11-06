@@ -1,4 +1,4 @@
-import CopyFXCore
+import TwinplicCore
 import SwiftUI
 
 struct PreviewSheet: View {

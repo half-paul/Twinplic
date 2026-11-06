@@ -1,5 +1,5 @@
 import XCTest
-@testable import CopyFXCore
+@testable import TwinplicCore
 
 final class TimeEstimateTests: XCTestCase {
     private func copying(bytes: Int64, of total: Int64, items: Int = 0, of itemsTotal: Int = 0) -> RunProgress {
@@ -55,7 +55,7 @@ final class TimeEstimateTests: XCTestCase {
     }
 
     func testScanReportsFoldersAndAdvancingPosition() throws {
-        let root = FileManager.default.temporaryDirectory.appendingPathComponent("CopyFXEstimate-\(UUID().uuidString)")
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent("TwinplicEstimate-\(UUID().uuidString)")
         defer { try? FileManager.default.removeItem(at: root) }
         let source = root.appendingPathComponent("source")
         let destination = root.appendingPathComponent("destination")

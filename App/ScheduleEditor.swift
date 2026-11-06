@@ -1,4 +1,4 @@
-import CopyFXCore
+import TwinplicCore
 import SwiftUI
 
 struct ScheduleEditor: View {
@@ -72,7 +72,7 @@ struct ScheduleEditor: View {
                     Text("Next run: \(next.formatted(date: .complete, time: .shortened))")
                         .fontWeight(.medium)
                 }
-                Text("Runs even when CopyFX is closed. If your Mac is asleep, the backup runs when it wakes.")
+                Text("Runs even when Twinplic is closed. If your Mac is asleep, the backup runs when it wakes.")
                     .foregroundStyle(.secondary)
             }
             .font(.caption)

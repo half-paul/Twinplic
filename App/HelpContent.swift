@@ -1,4 +1,4 @@
-import CopyFXCore
+import TwinplicCore
 import Foundation
 
 /// The Help window's pages. Text is Markdown, and a line starting with "• " is a list item.
@@ -56,7 +56,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
         case .gettingStarted:
             [
                 HelpSection(nil, """
-                CopyFX backs up a folder or disk to another folder or disk. After the first run it copies only what changed, and it keeps replaced and removed files in a SafetyNet folder for a while in case you need them back.
+                Twinplic backs up a folder or disk to another folder or disk. After the first run it copies only what changed, and it keeps replaced and removed files in a SafetyNet folder for a while in case you need them back.
                 """),
                 HelpSection("Your first backup", """
                 • Choose **New Backup** with the + button, or press ⌘N.
@@ -70,7 +70,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 """),
                 HelpSection("Keyboard shortcuts", """
                 • ⌘N: new backup
-                • ⌘?: CopyFX Help
+                • ⌘?: Twinplic Help
                 • ⌘Q: quit, from the menu bar icon's menu or the app menu
                 """),
             ]
@@ -85,7 +85,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 The source and destination can't be the same folder, and one can't be inside the other.
                 """),
                 HelpSection("Using a destination that already has files", """
-                CopyFX marks every destination it uses with a small hidden file. If you choose a folder that has files but no marker, CopyFX stops and asks first, because a backup could replace or remove those files. You can choose:
+                Twinplic marks every destination it uses with a small hidden file. If you choose a folder that has files but no marker, Twinplic stops and asks first, because a backup could replace or remove those files. You can choose:
 
                 • **Preview Changes** to see exactly what would happen.
                 • **Back Up Anyway** to take over the folder.
@@ -176,13 +176,13 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 These items use space on the destination. If the disk fills up, lower the number of days.
                 """),
                 HelpSection("Turning it off", """
-                With SafetyNet off, replaced and removed items are deleted permanently. CopyFX shows a warning under the toggle.
+                With SafetyNet off, replaced and removed items are deleted permanently. Twinplic shows a warning under the toggle.
                 """),
             ]
         case .schedule:
             [
                 HelpSection(nil, """
-                Scheduled backups run even when CopyFX is closed. If your Mac is asleep at the scheduled time, the backup runs when it wakes. A Mac that's shut down misses that run.
+                Scheduled backups run even when Twinplic is closed. If your Mac is asleep at the scheduled time, the backup runs when it wakes. A Mac that's shut down misses that run.
                 """),
                 HelpSection("Schedule types", """
                 • **Manually**: runs only when you choose Back Up Now.
@@ -227,7 +227,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 HelpSection("Dry run", """
                 With **Dry run** on, every run does its safety checks and scan, then logs what would change in History instead of doing it. This includes scheduled runs, so it's a good way to try a schedule. The first 200 changes are listed in History.
 
-                Dry runs and previews can use a destination CopyFX doesn't recognize, because they write nothing.
+                Dry runs and previews can use a destination Twinplic doesn't recognize, because they write nothing.
                 """),
                 HelpSection("What unchanged means", """
                 A file counts as unchanged if its size and modification time match, or a symlink if its target matches. This is the same test a backup uses to skip a file. Contents aren't compared. Folders and excluded items aren't counted.
@@ -249,7 +249,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
         case .restoring:
             [
                 HelpSection(nil, """
-                A backup is a normal folder of normal files, so you don't need CopyFX to get anything back.
+                A backup is a normal folder of normal files, so you don't need Twinplic to get anything back.
                 """),
                 HelpSection("Getting a file back", """
                 • Open the destination in Finder and copy the file back to where you want it.
@@ -264,31 +264,31 @@ enum HelpTopic: String, CaseIterable, Identifiable {
         case .permissions:
             [
                 HelpSection(nil, """
-                macOS asks for your permission the first time CopyFX reaches Desktop, Documents, Downloads, a removable disk or a network disk. Other protected data, such as Mail and Safari, needs Full Disk Access.
+                macOS asks for your permission the first time Twinplic reaches Desktop, Documents, Downloads, a removable disk or a network disk. Other protected data, such as Mail and Safari, needs Full Disk Access.
                 """),
                 HelpSection("Turning on Full Disk Access", """
-                An app can't grant this to itself, and macOS has no prompt for it. If macOS blocks anything, CopyFX shows an alert once per launch, and a banner on the task until a run finishes without being blocked.
+                An app can't grant this to itself, and macOS has no prompt for it. If macOS blocks anything, Twinplic shows an alert once per launch, and a banner on the task until a run finishes without being blocked.
 
                 • Choose **Open Full Disk Access Settings**.
-                • Turn on CopyFX. If it isn't listed, choose **Show CopyFX in Finder** and drag it into the list.
-                • Quit and reopen CopyFX.
+                • Turn on Twinplic. If it isn't listed, choose **Show Twinplic in Finder** and drag it into the list.
+                • Quit and reopen Twinplic.
 
                 Scheduled runs show no alert. They record the block in History, and the banner appears when you next open the app.
                 """),
                 HelpSection("Files with their own permissions", """
-                Full Disk Access doesn't help with an item's own permissions, such as a file owned by another user. CopyFX reports these separately. In Finder, choose **Get Info** on the item and give your account access.
+                Full Disk Access doesn't help with an item's own permissions, such as a file owned by another user. Twinplic reports these separately. In Finder, choose **Get Info** on the item and give your account access.
                 """),
                 HelpSection("What happens to blocked items", """
-                A folder that can't be read is skipped, and its existing backup stays in place. CopyFX never treats a folder it can't read as an empty one.
+                A folder that can't be read is skipped, and its existing backup stays in place. Twinplic never treats a folder it can't read as an empty one.
                 """),
             ]
         case .menuBar:
             [
                 HelpSection("Menu bar icon", """
-                Closing the main window keeps CopyFX running as a menu bar icon, with no Dock icon. The icon changes during a run, and its menu lists running tasks with their progress. Use it to reopen the window, open Help or quit.
+                Closing the main window keeps Twinplic running as a menu bar icon, with no Dock icon. The icon changes during a run, and its menu lists running tasks with their progress. Use it to reopen the window, open Help or quit.
                 """),
                 HelpSection("Launch at Login", """
-                Choose **Launch at Login** from the menu bar icon to start CopyFX at login, in the menu bar with no window. Scheduled backups run without this option. You can also manage it in System Settings > General > Login Items & Extensions.
+                Choose **Launch at Login** from the menu bar icon to start Twinplic at login, in the menu bar with no window. Scheduled backups run without this option. You can also manage it in System Settings > General > Login Items & Extensions.
                 """),
             ]
         case .dataProtection:
@@ -296,7 +296,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 HelpSection("Checks before every run", """
                 • A run stops if a disk isn't connected, including when an empty `/Volumes/Name` folder is left on the startup disk.
                 • Mirroring stops if the source is empty but the destination isn't, because an unplugged or wiped source looks like everything was deleted.
-                • A destination with files but no CopyFX marker needs your consent. Scheduled runs never get it.
+                • A destination with files but no Twinplic marker needs your consent. Scheduled runs never get it.
                 """),
                 HelpSection("During a run", """
                 • A source folder that can't be read is skipped, and its backup stays in place.
@@ -304,19 +304,19 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 • Permissions, extended attributes and ACLs are kept. On APFS, copies within a disk are clones where possible.
                 • One task can't run twice at once, even from the app and a schedule.
                 """),
-                HelpSection("Items CopyFX adds to a destination", """
-                • `\(Reserved.markerFile)`: marks the folder as a CopyFX destination.
+                HelpSection("Items Twinplic adds to a destination", """
+                • `\(Reserved.markerFile)`: marks the folder as a Twinplic destination.
                 • `\(Reserved.safetyNetFolder)`: holds SafetyNet items.
                 • Names starting with `\(Reserved.tempPrefix)`: files being copied. Any left by an interrupted run are removed by the next one.
                 """),
                 HelpSection("Where settings are kept", """
-                Tasks and history are in `~/Library/Application Support/CopyFX`.
+                Tasks and history are in `~/Library/Application Support/Twinplic`.
                 """),
             ]
         case .troubleshooting:
             [
                 HelpSection("“The disk isn't connected”", """
-                Connect the disk and try again. CopyFX refuses to write to a leftover folder in `/Volumes`, because that would fill your startup disk.
+                Connect the disk and try again. Twinplic refuses to write to a leftover folder in `/Volumes`, because that would fill your startup disk.
                 """),
                 HelpSection("“The source is empty but the destination has files”", """
                 Check the source disk is connected and has your files. If you really emptied it, use **Only add and update**, or clear the destination yourself.
@@ -330,11 +330,11 @@ enum HelpTopic: String, CaseIterable, Identifiable {
                 HelpSection("A scheduled backup didn't run", """
                 • Check the Mac was on. A shut down Mac misses that run.
                 • Check History for a skipped run if **Skip scheduled runs on battery power** is on.
-                • A destination CopyFX doesn't recognize shows as **Didn't run** in History. Run it by hand once.
-                • Open CopyFX from the copy of the app you use, so the schedule points to it.
+                • A destination Twinplic doesn't recognize shows as **Didn't run** in History. Run it by hand once.
+                • Open Twinplic from the copy of the app you use, so the schedule points to it.
                 """),
-                HelpSection("Full Disk Access is on but CopyFX is still blocked", """
-                Quit and reopen CopyFX. If you replaced the app with a different build, remove it from the Full Disk Access list and add it again.
+                HelpSection("Full Disk Access is on but Twinplic is still blocked", """
+                Quit and reopen Twinplic. If you replaced the app with a different build, remove it from the Full Disk Access list and add it again.
                 """),
                 HelpSection("A scan takes a long time", """
                 Scanning a network share is limited by how fast the server lists folders. Exclude folders you don't need, or schedule the run for a quiet time.
@@ -401,9 +401,9 @@ enum HelpTip {
     var message: String {
         switch self {
         case .source:
-            "The folder or disk to back up. CopyFX only reads from it, and never changes it."
+            "The folder or disk to back up. Twinplic only reads from it, and never changes it."
         case .destination:
-            "Where the backup goes, usually on another disk. If the folder already has files CopyFX didn't put there, it asks before doing anything."
+            "Where the backup goes, usually on another disk. If the folder already has files Twinplic didn't put there, it asks before doing anything."
         case .preview:
             "Shows what a run would add, replace, delete and leave unchanged. Nothing is changed, and nothing is added to History."
         case .backUpNow:
@@ -423,7 +423,7 @@ enum HelpTip {
         case .dryRun:
             "Every run of this task, including scheduled ones, only logs what would change. Nothing is backed up until you turn this off."
         case .schedule:
-            "Runs this backup automatically, even when CopyFX is closed. A sleeping Mac runs it on wake. A shut down Mac misses that run."
+            "Runs this backup automatically, even when Twinplic is closed. A sleeping Mac runs it on wake. A shut down Mac misses that run."
         case .skipOnBattery:
             "Skips scheduled runs while your Mac is on battery, and notes it in History. Manual runs aren't affected."
         case .excludes:

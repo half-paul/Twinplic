@@ -2,13 +2,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "CopyFXCore",
+    name: "TwinplicCore",
     platforms: [.macOS(.v14)],
     products: [
-        .library(name: "CopyFXCore", targets: ["CopyFXCore"])
+        .library(name: "TwinplicCore", targets: ["TwinplicCore"])
     ],
     targets: [
-        .target(name: "CopyFXCore"),
-        .testTarget(name: "CopyFXCoreTests", dependencies: ["CopyFXCore"]),
+        .target(name: "TwinplicCore"),
+        .testTarget(name: "TwinplicCoreTests", dependencies: ["TwinplicCore"]),
     ]
 )

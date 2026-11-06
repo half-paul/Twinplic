@@ -1,6 +1,6 @@
 import Darwin
 import XCTest
-@testable import CopyFXCore
+@testable import TwinplicCore
 
 final class BackupEngineTests: XCTestCase {
     private var root: URL!
@@ -9,7 +9,7 @@ final class BackupEngineTests: XCTestCase {
     private let fileManager = FileManager.default
 
     override func setUpWithError() throws {
-        root = fileManager.temporaryDirectory.appendingPathComponent("CopyFXTests-\(UUID().uuidString)")
+        root = fileManager.temporaryDirectory.appendingPathComponent("TwinplicTests-\(UUID().uuidString)")
         source = root.appendingPathComponent("source")
         destination = root.appendingPathComponent("destination")
         try fileManager.createDirectory(at: source, withIntermediateDirectories: true)
@@ -82,7 +82,7 @@ final class BackupEngineTests: XCTestCase {
         let file = try write("data", "folder/a.txt", in: source)
         let date = Date(timeIntervalSince1970: 1_000_000_000)
         try fileManager.setAttributes([.modificationDate: date, .posixPermissions: 0o640], ofItemAtPath: file.path)
-        XCTAssertEqual(setxattr(file.path, "com.copyfx.test", "value", 5, 0, 0), 0)
+        XCTAssertEqual(setxattr(file.path, "com.twinplic.test", "value", 5, 0, 0), 0)
         let folderDate = Date(timeIntervalSince1970: 1_100_000_000)
         try fileManager.setAttributes([.modificationDate: folderDate], ofItemAtPath: source.appendingPathComponent("folder").path)
 
@@ -93,7 +93,7 @@ final class BackupEngineTests: XCTestCase {
         let attributes = try fileManager.attributesOfItem(atPath: copy)
         XCTAssertEqual(attributes[.modificationDate] as? Date, date)
         XCTAssertEqual((attributes[.posixPermissions] as? NSNumber)?.intValue, 0o640)
-        XCTAssertEqual(getxattr(copy, "com.copyfx.test", nil, 0, 0, 0), 5)
+        XCTAssertEqual(getxattr(copy, "com.twinplic.test", nil, 0, 0, 0), 5)
 
         let folder = try fileManager.attributesOfItem(atPath: destination.appendingPathComponent("folder").path)
         XCTAssertEqual(folder[.modificationDate] as? Date, folderDate)

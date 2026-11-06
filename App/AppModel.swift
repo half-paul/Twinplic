@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import Foundation
 import Observation
 import ServiceManagement
@@ -190,8 +190,8 @@ final class AppModel {
         guard hasFullDiskAccess != true, !hasAskedForAccess else { return }
         hasAskedForAccess = true
         alert = AppAlert(
-            title: "CopyFX needs Full Disk Access",
-            message: "macOS blocked CopyFX from reading some items, so they weren't backed up. Their existing backups weren't touched. Only you can allow this, in System Settings. Turn on CopyFX in the list, then quit and reopen it.",
+            title: "Twinplic needs Full Disk Access",
+            message: "macOS blocked Twinplic from reading some items, so they weren't backed up. Their existing backups weren't touched. Only you can allow this, in System Settings. Turn on Twinplic in the list, then quit and reopen it.",
             offersAccessSettings: true
         )
     }

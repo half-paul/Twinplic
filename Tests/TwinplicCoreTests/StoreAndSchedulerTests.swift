@@ -1,12 +1,12 @@
 import XCTest
-@testable import CopyFXCore
+@testable import TwinplicCore
 
 final class StoreAndSchedulerTests: XCTestCase {
     private var root: URL!
     private var store: TaskStore!
 
     override func setUpWithError() throws {
-        root = FileManager.default.temporaryDirectory.appendingPathComponent("CopyFXStore-\(UUID().uuidString)")
+        root = FileManager.default.temporaryDirectory.appendingPathComponent("TwinplicStore-\(UUID().uuidString)")
         store = TaskStore(directory: root)
     }
 
@@ -75,12 +75,12 @@ final class StoreAndSchedulerTests: XCTestCase {
         var task = BackupTask(schedule: .daily(hour: 2, minute: 0))
         let plist = root.appendingPathComponent("\(LaunchAgentScheduler.labelPrefix)\(task.id.uuidString).plist")
 
-        try scheduler.sync(task, executablePath: "/Applications/CopyFX.app/Contents/MacOS/CopyFX")
+        try scheduler.sync(task, executablePath: "/Applications/Twinplic.app/Contents/MacOS/Twinplic")
 
         let parsed = try PropertyListSerialization.propertyList(from: Data(contentsOf: plist), format: nil) as? [String: Any]
         XCTAssertEqual(
             parsed?["ProgramArguments"] as? [String],
-            ["/Applications/CopyFX.app/Contents/MacOS/CopyFX", "--run-task", task.id.uuidString]
+            ["/Applications/Twinplic.app/Contents/MacOS/Twinplic", "--run-task", task.id.uuidString]
         )
 
         task.schedule = .manual

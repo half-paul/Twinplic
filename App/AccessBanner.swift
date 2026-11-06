@@ -1,5 +1,5 @@
 import AppKit
-import CopyFXCore
+import TwinplicCore
 import SwiftUI
 
 /// Says why items were refused and what can fix it. Shows nothing when there's nothing to do.
@@ -19,12 +19,12 @@ struct AccessBanner: View {
         if privacyBlocked > 0 {
             VStack(alignment: .leading, spacing: 6) {
                 Label(
-                    "macOS blocked \(count(privacyBlocked)), so CopyFX can't back them up. Turn on Full Disk Access for CopyFX, then quit and reopen it.",
+                    "macOS blocked \(count(privacyBlocked)), so Twinplic can't back them up. Turn on Full Disk Access for Twinplic, then quit and reopen it.",
                     systemImage: "lock.shield"
                 )
                 HStack {
                     Button("Open Full Disk Access Settings") { model.openFullDiskAccessSettings() }
-                    Button("Show CopyFX in Finder") {
+                    Button("Show Twinplic in Finder") {
                         NSWorkspace.shared.activateFileViewerSelecting([Bundle.main.bundleURL])
                     }
                 }

@@ -1,5 +1,5 @@
 import XCTest
-@testable import CopyFXCore
+@testable import TwinplicCore
 
 final class PauseTests: XCTestCase {
     private var root: URL!
@@ -8,7 +8,7 @@ final class PauseTests: XCTestCase {
     private let fileManager = FileManager.default
 
     override func setUpWithError() throws {
-        root = fileManager.temporaryDirectory.appendingPathComponent("CopyFXPause-\(UUID().uuidString)")
+        root = fileManager.temporaryDirectory.appendingPathComponent("TwinplicPause-\(UUID().uuidString)")
         source = root.appendingPathComponent("source")
         destination = root.appendingPathComponent("destination")
         try fileManager.createDirectory(at: source, withIntermediateDirectories: true)

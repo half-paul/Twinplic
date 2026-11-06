@@ -1,4 +1,4 @@
-// Generates the CopyFX app icon and logo files.
+// Generates the Twinplic app icon and logo files.
 // Run from the project root: swift Design/make_brand.swift
 import CoreGraphics
 import Foundation
@@ -122,15 +122,50 @@ func outline(_ build: (CGMutablePath) -> Void) -> CGPath {
 }
 
 /// Returns the letter outline and its advance, with the left edge of the centreline at x.
-func letterC(_ x: CGFloat) -> (CGPath, CGFloat) {
-    let r = capHeight / 2, angle = CGFloat.pi * 0.27
-    let path = outline { $0.addArc(center: CGPoint(x: x + r, y: r), radius: r, startAngle: -angle, endAngle: angle, clockwise: true) }
-    return (path, r + r * cos(angle))
+func letterT(_ x: CGFloat) -> (CGPath, CGFloat) {
+    let w: CGFloat = 104
+    let path = outline {
+        $0.move(to: CGPoint(x: x, y: 0))
+        $0.addLine(to: CGPoint(x: x + w, y: 0))
+        $0.move(to: CGPoint(x: x + w / 2, y: 0))
+        $0.addLine(to: CGPoint(x: x + w / 2, y: capHeight))
+    }
+    // Kerned, so the next letter tucks under the bar.
+    return (path, w - 24)
 }
 
-func letterO(_ x: CGFloat) -> (CGPath, CGFloat) {
+func letterW(_ x: CGFloat) -> (CGPath, CGFloat) {
+    let w: CGFloat = 136
+    let path = outline {
+        $0.move(to: CGPoint(x: x, y: xTop))
+        $0.addLine(to: CGPoint(x: x + w * 0.25, y: capHeight))
+        $0.addLine(to: CGPoint(x: x + w * 0.5, y: xTop))
+        $0.addLine(to: CGPoint(x: x + w * 0.75, y: capHeight))
+        $0.addLine(to: CGPoint(x: x + w, y: xTop))
+    }
+    return (path, w)
+}
+
+func letterI(_ x: CGFloat) -> (CGPath, CGFloat) {
+    let path = outline {
+        $0.move(to: CGPoint(x: x, y: xTop))
+        $0.addLine(to: CGPoint(x: x, y: capHeight))
+        // A very short line, so the round caps make a solid dot.
+        $0.move(to: CGPoint(x: x, y: 0))
+        $0.addLine(to: CGPoint(x: x, y: 0.01))
+    }
+    return (path, 0)
+}
+
+func letterN(_ x: CGFloat) -> (CGPath, CGFloat) {
     let r = (capHeight - xTop) / 2
-    let path = outline { $0.addEllipse(in: CGRect(x: x, y: xTop, width: r * 2, height: r * 2)) }
+    let path = outline {
+        $0.move(to: CGPoint(x: x, y: xTop))
+        $0.addLine(to: CGPoint(x: x, y: capHeight))
+        $0.move(to: CGPoint(x: x, y: xTop + r))
+        $0.addArc(center: CGPoint(x: x + r, y: xTop + r), radius: r, startAngle: .pi, endAngle: 0, clockwise: false)
+        $0.addLine(to: CGPoint(x: x + r * 2, y: capHeight))
+    }
     return (path, r * 2)
 }
 
@@ -144,57 +179,36 @@ func letterP(_ x: CGFloat) -> (CGPath, CGFloat) {
     return (path, r * 2)
 }
 
-func letterY(_ x: CGFloat) -> (CGPath, CGFloat) {
-    let w: CGFloat = 92
-    let path = outline {
-        $0.move(to: CGPoint(x: x, y: xTop))
-        $0.addLine(to: CGPoint(x: x + w * 0.5, y: capHeight))
-        $0.move(to: CGPoint(x: x + w, y: xTop))
-        $0.addLine(to: CGPoint(x: x + w * 0.28, y: descender))
-    }
-    return (path, w)
-}
-
-func letterF(_ x: CGFloat) -> (CGPath, CGFloat) {
-    let w: CGFloat = 84
-    let path = outline {
-        $0.move(to: CGPoint(x: x + w, y: 0))
-        $0.addLine(to: CGPoint(x: x, y: 0))
-        $0.addLine(to: CGPoint(x: x, y: capHeight))
-        $0.move(to: CGPoint(x: x, y: 70))
-        $0.addLine(to: CGPoint(x: x + w * 0.82, y: 70))
-    }
-    return (path, w)
-}
-
-func letterX(_ x: CGFloat) -> (CGPath, CGFloat) {
-    let w: CGFloat = 104
+func letterL(_ x: CGFloat) -> (CGPath, CGFloat) {
     let path = outline {
         $0.move(to: CGPoint(x: x, y: 0))
-        $0.addLine(to: CGPoint(x: x + w, y: capHeight))
-        $0.move(to: CGPoint(x: x + w, y: 0))
         $0.addLine(to: CGPoint(x: x, y: capHeight))
     }
-    return (path, w)
+    return (path, 0)
 }
 
-/// Lays out the name. Returns the "Copy" and "FX" outlines and the total width.
+func letterC(_ x: CGFloat) -> (CGPath, CGFloat) {
+    let r = (capHeight - xTop) / 2, angle = CGFloat.pi * 0.27
+    let path = outline { $0.addArc(center: CGPoint(x: x + r, y: xTop + r), radius: r, startAngle: -angle, endAngle: angle, clockwise: true) }
+    return (path, r + r * cos(angle))
+}
+
+/// Lays out the name. Returns the "Twin" and "plic" outlines and the total width.
 func wordmark() -> (CGPath, CGPath, CGFloat) {
     let gap: CGFloat = 46
     var x: CGFloat = 0
-    let copy = CGMutablePath(), fx = CGMutablePath()
-    for letter in [letterC, letterO, letterP, letterY] {
+    let twin = CGMutablePath(), plic = CGMutablePath()
+    for letter in [letterT, letterW, letterI, letterN] {
         let (p, advance) = letter(x)
-        copy.addPath(p)
+        twin.addPath(p)
         x += advance + gap
     }
-    x += 18
-    for letter in [letterF, letterX] {
+    for letter in [letterP, letterL, letterI, letterC] {
         let (p, advance) = letter(x)
-        fx.addPath(p)
+        plic.addPath(p)
         x += advance + gap
     }
-    return (copy, fx, x - gap)
+    return (twin, plic, x - gap)
 }
 
 // MARK: SVG
@@ -259,13 +273,13 @@ try! "{\n  \"info\" : { \"author\" : \"xcode\", \"version\" : 1 }\n}\n"
     .write(toFile: "App/Assets.xcassets/Contents.json", atomically: true, encoding: .utf8)
 
 // Mark and logo, in a version for light backgrounds and one for dark
-struct Theme { let name: String; let front, back, shared, copy, fx: Hex }
+struct Theme { let name: String; let front, back, shared, twin, plic: Hex }
 let themes = [
-    Theme(name: "light-bg", front: inkBottom, back: mist, shared: lime, copy: inkBottom, fx: pine),
-    Theme(name: "dark-bg", front: paper, back: mist, shared: lime, copy: paper, fx: lime),
+    Theme(name: "light-bg", front: inkBottom, back: mist, shared: lime, twin: inkBottom, plic: pine),
+    Theme(name: "dark-bg", front: paper, back: mist, shared: lime, twin: paper, plic: lime),
 ]
 
-let (copy, fx, wordWidth) = wordmark()
+let (twin, plic, wordWidth) = wordmark()
 let markSide: CGFloat = 512
 let pad: CGFloat = 32
 for t in themes {
@@ -283,14 +297,14 @@ for t in themes {
     let lockupW = (textX + wordWidth * textScale + stroke * textScale / 2 + pad).rounded(.up)
     let (la, lb) = sheets(center: CGPoint(x: pad + markH / 2, y: lockupH / 2), extent: markH, overlap: 98)
     var place = CGAffineTransform(translationX: textX, y: textY).scaledBy(x: textScale, y: textScale)
-    let placedCopy = copy.copy(using: &place)!
-    let placedFX = fx.copy(using: &place)!
-    let text = "<path fill=\"\(t.copy.css)\" d=\"\(svgPath(placedCopy))\"/>\n<path fill=\"\(t.fx.css)\" d=\"\(svgPath(placedFX))\"/>"
+    let placedTwin = twin.copy(using: &place)!
+    let placedPlic = plic.copy(using: &place)!
+    let text = "<path fill=\"\(t.twin.css)\" d=\"\(svgPath(placedTwin))\"/>\n<path fill=\"\(t.plic.css)\" d=\"\(svgPath(placedPlic))\"/>"
     writeSVG(lockupW, lockupH, svgMark(la, lb, front: t.front, back: t.back, shared: t.shared) + "\n" + text, "\(logoDir)/logo-\(t.name).svg")
     writePNG(pixels(Int(lockupW) * 2, Int(lockupH) * 2, scale: 2) { c in
         drawMark(c, la, lb, front: t.front, back: t.back, shared: t.shared)
-        c.addPath(placedCopy); c.setFillColor(t.copy.cg); c.fillPath()
-        c.addPath(placedFX); c.setFillColor(t.fx.cg); c.fillPath()
+        c.addPath(placedTwin); c.setFillColor(t.twin.cg); c.fillPath()
+        c.addPath(placedPlic); c.setFillColor(t.plic.cg); c.fillPath()
     }, "\(logoDir)/logo-\(t.name).png")
 }
 

@@ -2,9 +2,9 @@ import Foundation
 
 /// Names the engine owns on a destination. These are never copied or treated as extras.
 public enum Reserved {
-    public static let safetyNetFolder = "_CopyFX_SafetyNet"
-    public static let markerFile = ".copyfx-destination"
-    public static let tempPrefix = ".copyfx-tmp-"
+    public static let safetyNetFolder = "_Twinplic_SafetyNet"
+    public static let markerFile = ".twinplic-destination"
+    public static let tempPrefix = ".twinplic-tmp-"
 }
 
 public struct BackupTask: Codable, Identifiable, Hashable, Sendable {

@@ -7,7 +7,7 @@ extension OpenWindowAction {
     func showHelp(_ topic: HelpTopic?, model: AppModel) {
         if let topic { model.helpTopic = topic }
         NSApp.setActivationPolicy(.regular)
-        self(id: CopyFXApp.helpWindowID)
+        self(id: TwinplicApp.helpWindowID)
         NSApp.activate()
     }
 }
@@ -55,7 +55,7 @@ struct HelpMenuItem: View {
     let model: AppModel
 
     var body: some View {
-        Button("CopyFX Help") { openWindow.showHelp(nil, model: model) }
+        Button("Twinplic Help") { openWindow.showHelp(nil, model: model) }
             .keyboardShortcut("?", modifiers: .command)
     }
 }
@@ -89,7 +89,7 @@ struct HelpView: View {
         .searchable(text: $query, placement: .sidebar, prompt: "Search Help")
         .onDisappear {
             // With the main window also closed, the app goes back to the menu bar only.
-            let othersOpen = NSApp.windows.contains { $0.isVisible && $0.canBecomeMain && $0.title != CopyFXApp.helpWindowTitle }
+            let othersOpen = NSApp.windows.contains { $0.isVisible && $0.canBecomeMain && $0.title != TwinplicApp.helpWindowTitle }
             if !othersOpen { NSApp.setActivationPolicy(.accessory) }
         }
     }
