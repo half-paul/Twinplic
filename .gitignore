@@ -1,0 +1,7 @@
+build/
+.build/
+.swiftpm/
+CopyFX.xcodeproj/
+build-intel/
+.DS_Store
+dist/
