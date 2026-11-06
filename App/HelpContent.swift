@@ -236,7 +236,7 @@ enum HelpTopic: String, CaseIterable, Identifiable {
         case .history:
             [
                 HelpSection(nil, """
-                History keeps the last \(TaskStore.maxHistoryPerTask) runs of each task, newest first. Each row shows the result, the time, what changed and how much was copied. Click a row to see its errors, or the changes a dry run listed.
+                History keeps the last \(TaskStore.maxHistoryPerTask) runs of each task, newest first. Each row shows the result, the time, what changed, how many files were left unchanged and how much was copied. Click a row to see its errors, or the changes a dry run listed.
                 """),
                 HelpSection("Results", """
                 • **Completed**: the run finished with no problems.
