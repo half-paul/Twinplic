@@ -19,8 +19,8 @@ targetTemplates:
         PRODUCT_NAME: Twinplic
         PRODUCT_BUNDLE_IDENTIFIER: com.twinplic.app
         GENERATE_INFOPLIST_FILE: YES
-        MARKETING_VERSION: "1.0"
-        CURRENT_PROJECT_VERSION: "1"
+        MARKETING_VERSION: "1.0.1"
+        CURRENT_PROJECT_VERSION: "2"
         SWIFT_VERSION: "6.0"
         # A stable identity, because macOS ties Full Disk Access to the signature. An ad hoc
         # signature changes with every build, which silently cancels the grant.
